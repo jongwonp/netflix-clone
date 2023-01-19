@@ -1,5 +1,6 @@
-# Create React App을 이용한 netflix clone
+# netflix clone
 
+- Boilerplate: Create React App
 - CSS: Styled Components
 - Animation: Framer Motion
 - Routing: React Router
