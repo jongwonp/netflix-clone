@@ -4,4 +4,3 @@
 - Animation: Framer Motion
 - Routing: React Router
 - Data fetching: React Query
-- 
