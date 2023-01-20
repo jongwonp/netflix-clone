@@ -1,12 +1,12 @@
 # netflix clone
 
-## 이용 라이브러리
 
 - Boilerplate - Create React App
 - CSS - Styled Components
 - Animation - Framer Motion
 - Routing - React Router
 - Data fetching - React Query
+- API - https://www.themoviedb.org/
 
 ### 할일
 - [ ] header에 목록 추가
