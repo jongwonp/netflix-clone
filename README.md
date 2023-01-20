@@ -12,6 +12,8 @@
 - [x] header에 목록 추가
   - [x] 요즘 대세 컨텐츠
   - [x] 내가 찜한 컨텐츠
+- [ ] slider 넘어가는 버튼 만들기
+  - [ ] hover하면 나타나도록
 - [ ] 다른 종류의 slider 추가
 - [ ] slider의 영화 click/hover event에서 나오는 내용 및 기능 추가
 - [ ] 검색 기능 추가
