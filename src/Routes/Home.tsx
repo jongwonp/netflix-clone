@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useScroll } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useMatch, useNavigate } from 'react-router-dom';

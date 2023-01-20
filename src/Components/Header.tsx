@@ -104,6 +104,8 @@ function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const homeMatch = useMatch('');
   const tvMatch = useMatch('tv');
+  const trendingMatch = useMatch('trending');
+  const myListMatch = useMatch('myList');
   const inputAnimation = useAnimation();
   const navAnimation = useAnimation();
   const { scrollY } = useScroll();
@@ -155,6 +157,16 @@ function Header() {
           <Item>
             <Link to="tv">
               Tv Shows{tvMatch ? <Circle layoutId="circle" /> : null}
+            </Link>
+          </Item>
+          <Item>
+            <Link to="trending">
+              Trending{trendingMatch ? <Circle layoutId="circle" /> : null}
+            </Link>
+          </Item>
+          <Item>
+            <Link to="myList">
+              My List{myListMatch ? <Circle layoutId="circle" /> : null}
             </Link>
           </Item>
         </Items>
