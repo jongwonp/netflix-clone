@@ -88,12 +88,12 @@ const Info = styled(motion.div)`
 `;
 
 const rowVariants = {
-  hidden: (back: boolean) => ({
-    x: back ? window.outerWidth + 5 : -window.outerWidth - 5,
+  hidden: (back: number) => ({
+    x: back > 0 ? window.outerWidth + 5 : -window.outerWidth - 5,
   }),
   visible: { x: 0 },
-  exit: (back: boolean) => ({
-    x: back ? -window.outerWidth - 5 : window.outerWidth + 5,
+  exit: (back: number) => ({
+    x: back > 0 ? -window.outerWidth - 5 : window.outerWidth + 5,
   }),
 };
 
@@ -156,7 +156,7 @@ function Slider() {
   const toggleEnterInPrevBtn = () => setEnterInPrevBtn((prev) => !prev);
   const [enterInNextBtn, setEnterInNextBtn] = useState(false);
   const toggleEnterInNextBtn = () => setEnterInNextBtn((prev) => !prev);
-  const [back, setBack] = useState(false);
+  const [back, setBack] = useState(0);
   const increaseIndex = () => {
     if (data) {
       if (leaving) return;
@@ -164,7 +164,7 @@ function Slider() {
       const totalMovies = data.results.length - 1;
       const maxIndex = Math.floor(totalMovies / offset) - 1;
       setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
-      setBack(true);
+      setBack(1);
     }
   };
   const decreaseIndex = () => {
@@ -174,7 +174,7 @@ function Slider() {
       const totalMovies = data.results.length - 1;
       const maxIndex = Math.floor(totalMovies / offset) - 1;
       setIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
-      setBack(false);
+      setBack(-1);
     }
   };
   const onBoxClicked = (movieId: number) => {
@@ -186,7 +186,11 @@ function Slider() {
       onMouseEnter={toggleEnterInSlider}
       onMouseLeave={toggleEnterInSlider}
     >
-      <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
+      <AnimatePresence
+        initial={false}
+        onExitComplete={toggleLeaving}
+        custom={back}
+      >
         <PrevBtn
           onClick={decreaseIndex}
           onMouseEnter={toggleEnterInPrevBtn}
