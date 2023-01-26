@@ -197,6 +197,7 @@ function Slider() {
           onMouseLeave={toggleEnterInPrevBtn}
           variants={btnVariants}
           animate={enterInPrevBtn ? 'hover' : undefined}
+          key="prevButton"
         >
           <PrevArrow
             variants={btnArrowVariants}
@@ -254,6 +255,7 @@ function Slider() {
           onMouseLeave={toggleEnterInNextBtn}
           variants={btnVariants}
           animate={enterInNextBtn ? 'hover' : undefined}
+          key="nextButton"
         >
           <NextArrow
             variants={btnArrowVariants}
