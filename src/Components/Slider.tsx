@@ -88,9 +88,13 @@ const Info = styled(motion.div)`
 `;
 
 const rowVariants = {
-  hidden: { x: window.outerWidth + 5 },
+  hidden: (back: boolean) => ({
+    x: back ? window.outerWidth + 5 : -window.outerWidth - 5,
+  }),
   visible: { x: 0 },
-  exit: { x: -window.outerWidth - 5 },
+  exit: (back: boolean) => ({
+    x: back ? -window.outerWidth - 5 : window.outerWidth + 5,
+  }),
 };
 
 const boxVariants = {
@@ -144,7 +148,7 @@ function Slider() {
     ['movies', 'nowPlaying'],
     getMovies
   );
-  const [leaving, setLeaving] = useState(false);
+  const [leaving, setLeaving] = useState(false); // prev/next 버튼을 빠르게 여러번 클릭하면 슬라이드가 급하게 넘어가버리는 것을 방지하기 위해 이용할 state
   const toggleLeaving = () => setLeaving((prev) => !prev);
   const [enterInSlider, setEnterInSlider] = useState(false);
   const toggleEnterInSlider = () => setEnterInSlider((prev) => !prev);
@@ -152,6 +156,7 @@ function Slider() {
   const toggleEnterInPrevBtn = () => setEnterInPrevBtn((prev) => !prev);
   const [enterInNextBtn, setEnterInNextBtn] = useState(false);
   const toggleEnterInNextBtn = () => setEnterInNextBtn((prev) => !prev);
+  const [back, setBack] = useState(false);
   const increaseIndex = () => {
     if (data) {
       if (leaving) return;
@@ -159,9 +164,19 @@ function Slider() {
       const totalMovies = data.results.length - 1;
       const maxIndex = Math.floor(totalMovies / offset) - 1;
       setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
+      setBack(true);
     }
   };
-  const decreaseIndex = () => {};
+  const decreaseIndex = () => {
+    if (data) {
+      if (leaving) return;
+      toggleLeaving();
+      const totalMovies = data.results.length - 1;
+      const maxIndex = Math.floor(totalMovies / offset) - 1;
+      setIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
+      setBack(false);
+    }
+  };
   const onBoxClicked = (movieId: number) => {
     navigate(`movies/${movieId}`);
   };
@@ -201,6 +216,7 @@ function Slider() {
           </PrevArrow>
         </PrevBtn>
         <Row
+          custom={back}
           variants={rowVariants}
           initial="hidden"
           animate="visible"
